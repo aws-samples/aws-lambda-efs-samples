@@ -1,0 +1,11 @@
+{
+  "name": "process-largefiles",
+  "version": "1.0.0",
+  "description": "Process large video file to creating screenshots",
+  "main": "app.js",
+  "repository": "",
+  "author": "James Beswick, AWS Serverless",
+  "license": "MIT-0",
+  "dependencies": {
+  }
+}

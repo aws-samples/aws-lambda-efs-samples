@@ -1,0 +1,11 @@
+{
+  "name": "hello-world",
+  "version": "1.0.0",
+  "description": "Hello world sample for NodeJS",
+  "main": "app.js",
+  "repository": "",
+  "author": "James Beswick, AWS Serverless",
+  "license": "MIT-0",
+  "dependencies": {
+  }
+}

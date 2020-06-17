@@ -1,0 +1,79 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Unzip archive.
+
+Parameters:
+  InputFile:
+    Type: String
+    Default: video.zip
+  EFSpath:
+    Type: String
+    Default: /mnt/efs
+  DestinationDir:
+    Type: String
+    Default: frames
+  SecurityGroupIds:
+    Type: CommaDelimitedList
+    Default: sg-fa7133bc
+  SubnetIDs:
+    Type: CommaDelimitedList
+    Description: The list of SubnetIDs in your Virtual Private Cloud (VPC)
+    Default: subnet-80c98eae,subnet-04878f4e,subnet-e19ce486,subnet-bfc9fbb0,subnet-0bc28757,subnet-96c847a8
+  AccessPointARN:
+    Type: String
+    Description: Access point ARN
+
+Resources:
+  UnzipFileFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: unzipFiles/
+      Timeout: 300
+      MemorySize: 3008
+      Handler: app.handler
+      Environment:
+        Variables:
+          INPUT_FILE: !Ref InputFile
+          DESTINATION_DIR: !Ref DestinationDir
+          EFS_PATH: !Ref EFSpath
+      Runtime: nodejs12.x
+      Events:
+        API:
+          Type: Api 
+          Properties:
+            Path: /zipFiles
+            Method: get
+      VpcConfig:
+        SecurityGroupIds: !Ref SecurityGroupIds
+        SubnetIds: !Ref SubnetIDs
+      FileSystemConfigs:
+      - Arn: !Ref AccessPointARN
+        LocalMountPath: !Ref EFSpath     
+      Policies:
+      - Statement:
+        - Sid: AWSLambdaVPCAccessExecutionRole
+          Effect: Allow
+          Action:
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - ogs:PutLogEvents
+            - ec2:CreateNetworkInterface
+            - ec2:DescribeNetworkInterfaces
+            - ec2:DeleteNetworkInterface
+          Resource: "*"
+        - Sid: AmazonElasticFileSystemClientFullAccess
+          Effect: Allow
+          Action:
+            - elasticfilesystem:ClientMount
+            - elasticfilesystem:ClientRootAccess
+            - elasticfilesystem:ClientWrite
+            - elasticfilesystem:DescribeMountTargets
+          Resource: "*"
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  API:
+    Description: "API Gateway endpoint URL for Prod stage for function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/unzipFiles/"
