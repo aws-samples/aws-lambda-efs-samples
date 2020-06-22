@@ -5,6 +5,8 @@ Resources:
     Type: AWS::EC2::VPC
     Properties:
       CidrBlock: 172.31.0.0/16
+      EnableDnsHostnames: True
+      EnableDnsSupport: True      
  
   MountTargetSubnetOne:
     Type: AWS::EC2::Subnet
@@ -18,14 +20,14 @@ Resources:
     Properties:
       CidrBlock: 172.31.2.0/24
       VpcId: !Ref MountTargetVPC
-      AvailabilityZone: "us-east-1a"
+      AvailabilityZone: "us-east-1b"
 
   MountTargetSubnetThree:
     Type: AWS::EC2::Subnet
     Properties:
       CidrBlock: 172.31.3.0/24
       VpcId: !Ref MountTargetVPC
-      AvailabilityZone: "us-east-1a"
+      AvailabilityZone: "us-east-1c"
  
   FileSystemResource:
     Type: 'AWS::EFS::FileSystem'
