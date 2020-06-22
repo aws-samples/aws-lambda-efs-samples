@@ -2,7 +2,9 @@
 
 This repo contains AWS SAM templates that deploy serverless applications. The applications illustrate different ways to use EFS for Lambda.
 
-For full details on how this works, read the article at: https://aws.amazon.com/blogs/compute/using-amazon-efs-for-aws-lambda-in-your-serverless-applications/.
+For full details on how this works:
+- Read the Compute Blog post at: https://aws.amazon.com/blogs/compute/using-amazon-efs-for-aws-lambda-in-your-serverless-applications/.
+- Watch the [YouTube walkthrough](https://www.youtube.com/watch?v=vHwNh9JtPwE).
 
 Important: this application uses various AWS services and there are costs associated with these services after the Free Tier usage - please see the [AWS Pricing page](https://aws.amazon.com/pricing/) for details. You are responsible for any AWS costs incurred. No warranty is implied in these examples.
 
