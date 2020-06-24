@@ -16,7 +16,7 @@ Important: this application uses various AWS services and there are costs associ
 ├── 2-lambda-template           <-- "Hello World" example to use VPC and EFS
 │   └── package.json            <-- NodeJS dependencies and scripts
 │   └── template.yaml           <-- SAM template
-├── 3-largefiles                <-- Processes an MP4 video into screenshots
+├── 3-largefiles                <-- Processes a user-provided MP4 video into screenshots
 │   └── package.json            <-- NodeJS dependencies and scripts
 │   └── template.yaml           <-- SAM template
 ├── 4-zip                       <-- Zips many files into a zip archive
@@ -31,6 +31,7 @@ Important: this application uses various AWS services and there are costs associ
 
 * AWS CLI already configured with Administrator permission
 * [NodeJS 12.x installed](https://nodejs.org/en/download/)
+* An MP4 video for example #3 - video.mp4 is not provided in this repo.
 
 ## Installation Instructions
 
