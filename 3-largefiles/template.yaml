@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Process video (MP4) into a series of screenshots.
+Description: Process a user-provided video (e.g video.mp4) into a series of screenshots.
 
 Parameters:
   InputFile:
