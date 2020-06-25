@@ -66,7 +66,10 @@ You can find a list of subnet IDs for your account by executing:
 ```
 aws ec2 describe-subnets --query 'Subnets[*].{Id: SubnetId}' --output text
 ```
-
+And you can reformat to output only the IDs using this command:
+```
+aws ec2 describe-subnets --filters "Name=vpc-id,Values=<<ENTER YOUR VPC ID>>" --query 'Subnets[*].{Id: SubnetId}' --output text
+```
 You can find a list of access point ARNs for your account by executing:
 ```
 aws efs describe-access-points
