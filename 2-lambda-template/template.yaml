@@ -57,6 +57,13 @@ Resources:
             - elasticfilesystem:ClientWrite
             - elasticfilesystem:DescribeMountTargets
           Resource: "*"
+        - Sid: AWSLambdaBasicExecutionRole
+          Effect: Allow
+          Action:
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+          Resource: "*"
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
