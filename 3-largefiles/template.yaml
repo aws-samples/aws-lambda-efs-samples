@@ -21,6 +21,15 @@ Parameters:
     Description: Access point ARN
 
 Resources:
+  LargeFilesLamdbaLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      ContentUri: files/
+      CompatibleRuntimes: 
+        - nodejs12.x
+        - nodejs8.10
+      LicenseInfo: 'MIT'
+      RetentionPolicy: Retain
   ProcessFileFunction:
     Type: AWS::Serverless::Function 
     Properties:
@@ -29,7 +38,8 @@ Resources:
       MemorySize: 2048      
       Handler: app.handler
       Layers: 
-        - arn:aws:lambda:us-east-1:780018668030:layer:ffmpeg:1
+        # - arn:aws:lambda:us-east-1:780018668030:layer:ffmpeg:1
+        - !Ref LargeFilesLamdbaLayer
       Environment:
         Variables:
           INPUT_FILE: !Ref InputFile
